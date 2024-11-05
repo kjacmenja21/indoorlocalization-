@@ -1,0 +1,3 @@
+[submodule "indoorlocalization_backend"]
+	path = indoorlocalization_backend
+	url = https://github.com/kjacmenja21/indoorlocalization_backend
