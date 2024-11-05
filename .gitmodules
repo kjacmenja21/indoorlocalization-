@@ -1,3 +1,6 @@
 [submodule "indoorlocalization_backend"]
 	path = indoorlocalization_backend
 	url = https://github.com/kjacmenja21/indoorlocalization_backend
+[submodule "indoorlocalization_mobile_app"]
+	path = indoorlocalization_mobile_app
+	url = https://github.com/kjacmenja21/indoorlocalization_mobile_app
