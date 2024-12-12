@@ -1,4 +1,4 @@
-# Use the official Eclipse Mosquitto image
+# Use the official Eclipse Mosquitto image from Docker Hub
 FROM eclipse-mosquitto:2.0.15
 
 # Set environment variables for user passwords (these will be provided by Railway)
@@ -19,5 +19,20 @@ COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
 EXPOSE 1883
 EXPOSE 9001  # Uncomment if WebSockets are enabled
 
-# Start Mosquitto with the custom configuration
-CMD ["mosquitto", "-c", "/etc/mosquitto/mosquitto.conf"]
+# Copy the Mosquitto configuration file if needed (optional step)
+# COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
+
+# Install Node.js for running the asset simulation script
+RUN apk add --no-cache nodejs npm
+
+# Set up the working directory for the asset simulator
+WORKDIR /usr/src/app
+
+# Copy the asset simulation script and dependencies
+COPY package*.json ./
+RUN npm install
+COPY asset-simulator.js .
+
+# Start Mosquitto and the asset simulation script together
+CMD ["sh", "-c", "mosquitto -c /etc/mosquitto/mosquitto.conf & node /usr/src/app/asset-simulator.js"]
+
