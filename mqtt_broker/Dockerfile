@@ -21,4 +21,4 @@ EXPOSE 1883
 EXPOSE 9001  
 
 # Start Mosquitto with the custom configuration
-CMD ["mosquitto", "-c", "nc -zv {$MQTT_INTERNAL} 1883 & /etc/mosquitto/mosquitto.conf"]
+CMD ["mosquitto", "-c", "/etc/mosquitto/mosquitto.conf"]
