@@ -1,7 +1,0 @@
-:{$PORT} {
-    reverse_proxy / {$MQTT_INTERNAL}:1883
-
-    reverse_proxy /ws {$MQTT_INTERNAL}:8080 
-
-    reverse_proxy /misc {$MQTT_INTERNAL}:8888 
-}
