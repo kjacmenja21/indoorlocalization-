@@ -1,19 +1,19 @@
 :{$PORT} {
     reverse_proxy / {$MQTT_INTERNAL}:1883
-    # {
-    #     header_up Host {host}
-    #     header_up X-Forwarded-Proto {scheme}
-    # }
+    {
+        header_up Host {host}
+        header_up X-Forwarded-Proto {scheme}
+    }
 
     reverse_proxy /ws {$MQTT_INTERNAL}:8080 
-    # {
-    #     header_up Host {host}
-    #     header_up X-Forwarded-Proto {scheme}
-    # }
+    {
+        header_up Host {host}
+        header_up X-Forwarded-Proto {scheme}
+    }
 
     reverse_proxy /misc {$MQTT_INTERNAL}:8888 
-    # {
-    #     header_up Host {host}
-    #     header_up X-Forwarded-Proto {scheme}
-    # }
+    {
+        header_up Host {host}
+        header_up X-Forwarded-Proto {scheme}
+    }
 }
