@@ -13,7 +13,7 @@ RUN set -e && \
     mosquitto_passwd -b /mosquitto/config/mosquitto.passwd api ${API_PASSWORD}
 
 # Copy your custom Mosquitto configuration file into the container
-COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
+COPY mqtt_broker/mosquitto.conf /etc/mosquitto/mosquitto.conf
 
 # Expose the required ports for MQTT and WebSockets
 EXPOSE 1883
