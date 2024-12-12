@@ -17,7 +17,8 @@ COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
 
 # Expose the required ports for MQTT and WebSockets
 EXPOSE 1883
-EXPOSE 9001  # Uncomment if WebSockets are enabled
+# Uncomment if WebSockets are enabled
+EXPOSE 9001  
 
 # Copy the Mosquitto configuration file if needed (optional step)
 # COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
