@@ -1,7 +1,3 @@
-Here is a README for the **Indoor Localization** repository:
-
----
-
 # Indoor Localization
 
 **Indoor Localization** is a comprehensive solution designed to track and manage assets within indoor environments. This repository includes the full stack for building indoor localization systems, including backend services, mobile and web applications, and visual data insights like floor maps and asset tracking.
@@ -25,6 +21,8 @@ This project uses the following technologies:
 
 ### Prerequisites
 This repository is used as a collective for the project. You can access all the other repositories by clicking on them and reading their **README.md** for installation steps.
+
+This project is primarly developed for the platform Railway.app. Each submodule is possible to build and deploy using [Nixpacks](https://nixpacks.com/docs/getting-started) with zero configuration. More on that can be read [here](https://docs.railway.com/reference/nixpacks)
 
 ## Contributing
 
