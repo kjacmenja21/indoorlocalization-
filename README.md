@@ -17,73 +17,14 @@ Here is a README for the **Indoor Localization** repository:
 
 This project uses the following technologies:
 
-- **Backend**: Node.js (Express), API communication with frontend
-- **Frontend**: React (for web) and Flutter (for mobile)
-- **Database**: MongoDB (for storing asset and location data)
-- **Data Visualization**: Libraries for rendering heatmaps and floor maps
+- **Backend**: Python FastAPI, API communication with frontend
+- **Frontend**: React + Vite (for web) and Flutter (for mobile)
+- **Database**: PostgreSQL (for storing asset and location data)
 
 ## Setup
 
 ### Prerequisites
-Ensure you have the following installed:
-- Node.js
-- NPM or Yarn
-- MongoDB (or any other configured database)
-
-### Installation
-
-Follow these steps to set up the project on your local machine:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/kjacmenja21/indoorlocalization.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd indoorlocalization
-   ```
-
-3. Install the necessary dependencies for both frontend and backend:
-   ```bash
-   npm install
-   ```
-
-4. Configure the database (MongoDB or other), ensuring the connection settings in the backend are correct.
-
-### Running the Project
-
-To run the development environment for both the backend and frontend, follow these commands:
-
-1. **Backend**:
-   ```bash
-   cd backend
-   npm run dev
-   ```
-
-2. **Frontend (Web)**:
-   ```bash
-   cd frontend/web-app
-   npm run dev
-   ```
-
-3. **Frontend (Mobile)**:
-   Follow the specific instructions for running the mobile app via Flutter (make sure Flutter is installed).
-
-### Building for Production
-
-To build the project for production, use:
-
-- **Backend**:
-   ```bash
-   npm run build
-   ```
-- **Frontend**:
-   For web:
-   ```bash
-   npm run build
-   ```
-   For mobile, use Flutter’s build commands to generate production-ready APKs or iOS builds.
+This repository is used as a collective for the project. You can access all the other repositories by clicking on them and reading their **README.md** for installation steps.
 
 ## Contributing
 
@@ -100,11 +41,3 @@ We welcome contributions! To contribute to the project:
 ## License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
-For more information, please visit the [repository](https://github.com/kjacmenja21/indoorlocalization).
-
----
-
-This README provides a detailed overview of how to set up the project and contributes to the existing repository. If you need further adjustments, feel free to let me know!
