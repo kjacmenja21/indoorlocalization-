@@ -1,6 +1,12 @@
 const mqtt = require('mqtt');
-//const client = mqtt.connect('mqtt://localhost:1883');
-const client = mqtt.connect('mqtt://test.mosquitto.org:1883'); // TODO: Use environmental variable for broker address
+require('dotenv').config();
+
+// Load configuration from environment variables
+const BROKER_URL = process.env.BROKER_URL || 'mqtt://localhost:1883';
+const BASE_TOPIC = process.env.BASE_TOPIC || 'assets';
+const PUBLISH_INTERVAL = parseInt(process.env.PUBLISH_INTERVAL, 10) || 2000;
+
+const client = mqtt.connect(BROKER_URL);
 
 function generateAssetLocation(assetId) {
     const lat = Math.random() * 1000 % 199;
@@ -12,29 +18,34 @@ function generateAssetLocation(assetId) {
         y: lon
     };
 }
+
 client.on('connect', () => {
-    console.log('Connected to MQTT broker');
+    console.log(`Connected to MQTT broker at ${BROKER_URL}`);
 
     // Subscribe to all asset location topics
-    client.subscribe('assets/+/location', (err) => {
+    client.subscribe(`${BASE_TOPIC}/+/location`, (err) => {
         if (err) {
             console.error('Subscription error:', err);
         } else {
-            console.log('Subscribed to asset location topics');
+            console.log(`Subscribed to topic: ${BASE_TOPIC}/+/location`);
         }
     });
 
     let assetId = 1;
     setInterval(() => {
         const locationData = generateAssetLocation(assetId);
-        const topic = `assets/${assetId}/location`; // TODO: load topic from environment variable
+        const topic = `${BASE_TOPIC}/${assetId}/location`;
         client.publish(topic, JSON.stringify(locationData));
-        console.log(`Published: ${JSON.stringify(locationData)}`);
+        console.log(`Published to ${topic}: ${JSON.stringify(locationData)}`);
         assetId = assetId < 5 ? assetId + 1 : 1;
-    }, 2000); // TODO: load time interval from environment variable, parse value to integer
+    }, PUBLISH_INTERVAL);
 });
 
 client.on('message', (topic, message) => {
-    const locationData = JSON.parse(message.toString());
-    console.log(`Received on ${topic}:`, locationData);
+    try {
+        const locationData = JSON.parse(message.toString());
+        console.log(`Received on ${topic}:`, locationData);
+    } catch (error) {
+        console.error('Error parsing message:', error);
+    }
 });
