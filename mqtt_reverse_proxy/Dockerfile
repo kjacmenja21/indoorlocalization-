@@ -1,7 +1,5 @@
 FROM caddy:latest
 
-WORKDIR /app
-
 COPY Caddyfile ./
 
 RUN caddy fmt --overwrite Caddyfile
