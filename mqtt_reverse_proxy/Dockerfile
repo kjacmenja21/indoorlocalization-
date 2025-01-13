@@ -4,10 +4,6 @@ WORKDIR /app
 
 COPY Caddyfile ./
 
-COPY --chmod=755 entrypoint.sh ./
-
 RUN caddy fmt --overwrite Caddyfile
 
-ENTRYPOINT ["/bin/sh"]
-
-CMD ["entrypoint.sh"]
+CMD ["caddy", "run", "--config", "Caddyfile", "--adapter", "caddyfile"]
