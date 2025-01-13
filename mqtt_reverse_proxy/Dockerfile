@@ -2,7 +2,7 @@ FROM caddy:latest
 
 WORKDIR /mqtt_reverse_proxy
 
-COPY Caddyfile ./
+COPY ./Caddyfile ./
 
 RUN caddy fmt --overwrite Caddyfile
 
