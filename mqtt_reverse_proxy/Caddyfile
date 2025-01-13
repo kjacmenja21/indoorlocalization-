@@ -10,41 +10,40 @@
     }
 }
 
-# Listen on the $PORT environment variable
+# Listens on the $PORT environment variable provided by Railway
 :{$PORT} {
-    # Access logs
     log {
         format json
     }
 
-    @wss {
+    @mqttWs {
         header Connection *Upgrade*
-        header Upgrade websocket
-        path /*
+        header Upgrade    websocket
     }
 
-    reverse_proxy @wss {
-        # Dynamically resolve the EMQX WSS service address
+    reverse_proxy @mqttWs {
+        # Proxies WebSocket traffic to the EMQX WebSocket port
         dynamic a {
-            name {$EMQX_WSS_SERVICE}
-            port {$EMQX_WSS_PORT}
+            name {$MQTT_SERVICE}
+            port {$MQTT_WS_PORT}
             refresh 1s
             dial_timeout 30s
             versions ipv4 ipv6
         }
 
-        # Load balancing and passive health checks
+        # Configure load balancing settings
         lb_policy round_robin
         lb_retries 100
         lb_try_duration 10s
         lb_try_interval 250ms
 
+        # Configure passive health checks
         fail_duration 60s
         max_fails 300
         unhealthy_latency 5s
         unhealthy_request_count 200
 
-        # Set the Host header
+        # Sets the Host header to the dynamic name and port options
         header_up Host {upstream_hostport}
     }
 }
