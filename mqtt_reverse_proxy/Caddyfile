@@ -22,28 +22,27 @@
     }
 
     reverse_proxy @mqttWs {
-        # Proxies WebSocket traffic to the EMQX WebSocket port
-        dynamic a {
-            name {$MQTT_SERVICE}
-            port {$MQTT_WS_PORT}
+        # Use a dynamic upstream with DNS-based discovery
+        dynamic {
+            resolver system
+            addr {$MQTT_SERVICE}:{$MQTT_WS_PORT}
             refresh 1s
             dial_timeout 30s
-            versions ipv4 ipv6
         }
 
-        # Configure load balancing settings
+        # Load balancing configuration
         lb_policy round_robin
         lb_retries 100
         lb_try_duration 10s
         lb_try_interval 250ms
 
-        # Configure passive health checks
+        # Passive health checks
         fail_duration 60s
         max_fails 300
         unhealthy_latency 5s
         unhealthy_request_count 200
 
-        # Sets the Host header to the dynamic name and port options
-        header_up Host {upstream_hostport}
+        # Set the Host header for upstream communication
+        header_up Host {hostport}
     }
 }
