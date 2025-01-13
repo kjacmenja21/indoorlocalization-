@@ -1,8 +1,8 @@
 FROM caddy:latest
 
-WORKDIR /mqtt_reverse_proxy
+WORKDIR /app
 
-COPY ./Caddyfile ./
+COPY ./mqtt_reverse_proxy/Caddyfile ./
 
 RUN caddy fmt --overwrite Caddyfile
 
